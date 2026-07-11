@@ -26,10 +26,10 @@
   "icon": "🪥",
   "subtitle": "Đánh răng",
   "sentences": [
-    { "en": "Brush your teeth, Lucy.", "ipa": "/brʌʃ jʊr tiːθ ˈluːsi/", "vi": "Con đánh răng đi, Lucy." },
-    { "en": "Okay, Dad.", "ipa": "/ˌoʊˈkeɪ dæd/", "vi": "Dạ được ạ, ba." },
-    { "en": "Good job.", "ipa": "/ɡʊd dʒɑːb/", "vi": "Tốt lắm." },
-    { "en": "I'm brushing.", "ipa": "/aɪm ˈbrʌʃɪŋ/", "vi": "Con đang đánh răng đây ạ." }
+    { "en": "Brush your teeth, Lucy.", "vi": "Con đánh răng đi, Lucy." },
+    { "en": "Okay, Dad.", "vi": "Dạ được ạ, ba." },
+    { "en": "Good job.", "vi": "Tốt lắm." },
+    { "en": "I'm brushing.", "vi": "Con đang đánh răng đây ạ." }
   ],
   "vocabulary": [
     { "word": "brush", "ipa": "/brʌʃ/", "meaning": "chải - đánh (răng)", "example": "Brush your teeth." },
