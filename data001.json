@@ -1,0 +1,92 @@
+{
+  "version": "1.0",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "☕ Ordering Coffee",
+      "icon": "☕",
+      "subtitle": "Gọi cà phê",
+      "sentences": [
+        { "en": "Good morning! What can I get for you today?", "vi": "Chào buổi sáng! Hôm nay tôi có thể phục vụ gì cho bạn?" },
+        { "en": "I'd like a cappuccino, please.", "vi": "Làm ơn cho tôi một cốc cappuccino." },
+        { "en": "Sure, would you like anything to eat with that?", "vi": "Được chứ, bạn có muốn ăn kèm gì không?" },
+        { "en": "Yes, I'll have a croissant too.", "vi": "Có, tôi cũng muốn một cái bánh sừng bò." },
+        { "en": "That'll be $7.50. How would you like to pay?", "vi": "Tổng cộng 7.50 đô. Bạn muốn thanh toán bằng cách nào?" },
+        { "en": "I'll pay by card, please.", "vi": "Tôi thanh toán bằng thẻ." },
+        { "en": "Here's your order. Enjoy your coffee!", "vi": "Đây là đồ của bạn. Thưởng thức cà phê nhé!" }
+      ],
+      "vocabulary": [
+        { "word": "Good morning", "ipa": "/ɡʊd ˈmɔːrnɪŋ/", "meaning": "Chào buổi sáng", "example": "Good morning! How are you?" },
+        { "word": "cappuccino", "ipa": "/ˌkæpʊˈtʃiːnoʊ/", "meaning": "cà phê cappuccino", "example": "I'd like a cappuccino." },
+        { "word": "croissant", "ipa": "/krwɑːˈsɑ̃ː/", "meaning": "bánh sừng bò", "example": "I'll have a croissant." },
+        { "word": "pay by card", "ipa": "/peɪ baɪ kɑːrd/", "meaning": "thanh toán bằng thẻ", "example": "I'll pay by card." },
+        { "word": "enjoy", "ipa": "/ɪnˈdʒɔɪ/", "meaning": "thưởng thức", "example": "Enjoy your coffee!" }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "👋 Introducing Yourself",
+      "icon": "👋",
+      "subtitle": "Giới thiệu bản thân",
+      "sentences": [
+        { "en": "Hi, I'm Alex. Nice to meet you!", "vi": "Chào, tôi là Alex. Rất vui được gặp bạn!" },
+        { "en": "Hello Alex, my name is Maria.", "vi": "Chào Alex, tên tôi là Maria." },
+        { "en": "Where are you from, Maria?", "vi": "Bạn đến từ đâu vậy Maria?" },
+        { "en": "I'm from Spain, but I live in London now.", "vi": "Tôi đến từ Tây Ban Nha, nhưng hiện sống ở London." },
+        { "en": "What do you do for a living?", "vi": "Bạn làm nghề gì?" },
+        { "en": "I work as a graphic designer.", "vi": "Tôi làm thiết kế đồ họa." },
+        { "en": "That sounds interesting! I'm a teacher.", "vi": "Nghe thú vị đấy! Tôi là giáo viên." },
+        { "en": "Great to meet you. Let's keep in touch!", "vi": "Rất vui được gặp bạn. Hãy giữ liên lạc nhé!" }
+      ],
+      "vocabulary": [
+        { "word": "nice to meet you", "ipa": "/naɪs tə miːt juː/", "meaning": "rất vui được gặp bạn", "example": "Nice to meet you!" },
+        { "word": "from", "ipa": "/frʌm/", "meaning": "từ", "example": "Where are you from?" },
+        { "word": "graphic designer", "ipa": "/ˈɡræfɪk dɪˈzaɪnər/", "meaning": "nhà thiết kế đồ họa", "example": "I work as a graphic designer." },
+        { "word": "keep in touch", "ipa": "/kiːp ɪn tʌtʃ/", "meaning": "giữ liên lạc", "example": "Let's keep in touch!" },
+        { "word": "interesting", "ipa": "/ˈɪntrəstɪŋ/", "meaning": "thú vị", "example": "That sounds interesting!" }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "🗺️ Asking for Directions",
+      "icon": "🗺️",
+      "subtitle": "Hỏi đường",
+      "sentences": [
+        { "en": "Excuse me, where is the nearest bank?", "vi": "Xin lỗi, ngân hàng gần nhất ở đâu?" },
+        { "en": "Go straight ahead for two blocks.", "vi": "Đi thẳng khoảng hai dãy nhà." },
+        { "en": "Then turn right at the corner.", "vi": "Sau đó rẽ phải ở góc đường." },
+        { "en": "The bank is next to the supermarket.", "vi": "Ngân hàng ở bên cạnh siêu thị." },
+        { "en": "How long does it take to walk there?", "vi": "Đi bộ đến đó mất bao lâu?" },
+        { "en": "It's about 10 minutes on foot.", "vi": "Khoảng 10 phút đi bộ." },
+        { "en": "Thank you very much for your help!", "vi": "Cảm ơn bạn rất nhiều!" }
+      ],
+      "vocabulary": [
+        { "word": "straight ahead", "ipa": "/streɪt əˈhɛd/", "meaning": "đi thẳng", "example": "Go straight ahead." },
+        { "word": "turn right", "ipa": "/tɜːrn raɪt/", "meaning": "rẽ phải", "example": "Turn right at the corner." },
+        { "word": "on foot", "ipa": "/ɒn fʊt/", "meaning": "đi bộ", "example": "It's 10 minutes on foot." }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "🏨 Hotel Check-in",
+      "icon": "🏨",
+      "subtitle": "Nhận phòng khách sạn",
+      "sentences": [
+        { "en": "Good evening. I have a reservation.", "vi": "Chào buổi tối. Tôi có đặt phòng." },
+        { "en": "Welcome, sir. Let me check you in.", "vi": "Chào mừng anh. Để tôi làm thủ tục nhận phòng." },
+        { "en": "Could I see your passport, please?", "vi": "Cho tôi xem hộ chiếu được không?" },
+        { "en": "Your room is on the 5th floor, room 502.", "vi": "Phòng của anh ở tầng 5, phòng 502." },
+        { "en": "Does the room have free Wi-Fi?", "vi": "Phòng có Wi-Fi miễn phí không?" },
+        { "en": "Yes, the password is on the key card.", "vi": "Có, mật khẩu ở trên thẻ phòng." },
+        { "en": "What time is breakfast served?", "vi": "Bữa sáng được phục vụ lúc mấy giờ?" },
+        { "en": "Breakfast is from 7 to 10 AM.", "vi": "Bữa sáng từ 7 đến 10 giờ sáng." }
+      ],
+      "vocabulary": [
+        { "word": "reservation", "ipa": "/ˌrɛzərˈveɪʃən/", "meaning": "đặt trước", "example": "I have a reservation." },
+        { "word": "passport", "ipa": "/ˈpæspɔːrt/", "meaning": "hộ chiếu", "example": "Your passport, please." },
+        { "word": "key card", "ipa": "/kiː kɑːrd/", "meaning": "thẻ phòng", "example": "The key card has the password." },
+        { "word": "breakfast", "ipa": "/ˈbrɛkfəst/", "meaning": "bữa sáng", "example": "Breakfast is served from 7 AM." }
+      ]
+    }
+  ]
+}
