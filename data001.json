@@ -23,7 +23,25 @@
         { "word": "enjoy", "ipa": "/ɪnˈdʒɔɪ/", "meaning": "thưởng thức", "example": "Enjoy your coffee!" }
       ]
     },
-    
+    {
+  "id": 2,
+  "title": "🌅 Wake Up",
+  "icon": "🌅",
+  "subtitle": "Thức dậy",
+  "sentences": [
+    { "en": "Wake up, Lucy.", "vi": "Thức dậy đi con, Lucy." },
+    { "en": "I'm sleepy.", "vi": "Con vẫn còn buồn ngủ lắm." },
+    { "en": "Get up now.", "vi": "Rời khỏi giường ngay đi nào." },
+    { "en": "Okay, Dad.", "vi": "Dạ được ạ, ba." }
+  ],
+  "vocabulary": [
+    { "word": "wake up", "ipa": "/weɪk ʌp/", "meaning": "thức dậy (mở mắt)", "example": "Wake up, Lucy." },
+    { "word": "sleepy", "ipa": "/ˈsliːpi/", "meaning": "buồn ngủ", "example": "I'm sleepy." },
+    { "word": "get up", "ipa": "/ɡet ʌp/", "meaning": "rời khỏi giường", "example": "Get up now." },
+    { "word": "now", "ipa": "/naʊ/", "meaning": "ngay bây giờ", "example": "Get up now." },
+    { "word": "okay", "ipa": "/ˌoʊˈkeɪ/", "meaning": "dạ - được ạ", "example": "Okay, Dad." }
+  ]
+},
    
     {
       "id": 4,
