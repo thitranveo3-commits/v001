@@ -21,44 +21,7 @@
     { "word": "okay", "ipa": "/ˌoʊˈkeɪ/", "meaning": "dạ - được ạ", "example": "Okay, Dad." }
   ]
 },
-   {
-  "id": 2,
-  "title": "2.🪥 Brushing Teeth",
-  "icon": "🪥",
-  "subtitle": "Đánh răng",
-  "sentences": [
-    { "en": "Brush your teeth, Lucy.", "ipa": "/brʌʃ jʊr tiːθ ˈluːsi/", "vi": "Con đánh răng đi, Lucy." },
-    { "en": "Okay, Dad.", "ipa": "/ˌoʊˈkeɪ dæd/", "vi": "Dạ được ạ, ba." },
-    { "en": "Good job.", "ipa": "/ɡʊd dʒɑːb/", "vi": "Tốt lắm." },
-    { "en": "I'm brushing.", "ipa": "/aɪm ˈbrʌʃɪŋ/", "vi": "Con đang đánh răng đây ạ." }
-  ],
-  "vocabulary": [
-    { "word": "brush", "ipa": "/brʌʃ/", "meaning": "chải - đánh (răng)", "example": "Brush your teeth." },
-    { "word": "teeth", "ipa": "/tiːθ/", "meaning": "răng", "example": "Brush your teeth." },
-    { "word": "brush your teeth", "ipa": "/brʌʃ jʊr tiːθ/", "meaning": "đánh răng", "example": "Brush your teeth, Lucy." },
-    { "word": "okay", "ipa": "/ˌoʊˈkeɪ/", "meaning": "dạ - được ạ", "example": "Okay, Dad." },
-    { "word": "good job", "ipa": "/ɡʊd dʒɑːb/", "meaning": "tốt lắm - làm tốt lắm", "example": "Good job." },
-    { "word": "brushing", "ipa": "/ˈbrʌʃɪŋ/", "meaning": "đang đánh răng", "example": "I'm brushing." }
-  ]
-},
-    {
-  "id": 3,
-  "title": "3.💦 Washing Your Face",
-  "icon": "💦",
-  "subtitle": "Rửa mặt",
-  "sentences": [
-    { "en": "Wash your face, Lucy.", "ipa": "/wɑːʃ jʊr feɪs ˈluːsi/", "vi": "Con rửa mặt đi, Lucy." },
-    { "en": "Okay, Dad.", "ipa": "/ˌoʊˈkeɪ dæd/", "vi": "Dạ được ạ, ba." },
-    { "en": "Good girl.", "ipa": "/ɡʊd ɡɜːrl/", "vi": "Con gái ngoan lắm." },
-    { "en": "I feel fresh.", "ipa": "/aɪ fiːl freʃ/", "vi": "Con cảm thấy sảng khoái rồi ạ." }
-  ],
-  "vocabulary": [
-    { "word": "wash", "ipa": "/wɑːʃ/", "meaning": "rửa", "example": "Wash your face." },
-    { "word": "wash your face", "ipa": "/wɑːʃ jʊr feɪs/", "meaning": "rửa mặt", "example": "Wash your face, Lucy." },
-    { "word": "good girl", "ipa": "/ɡʊd ɡɜːrl/", "meaning": "cô bé ngoan - ngoan lắm", "example": "Good girl." },
-    { "word": "feel fresh", "ipa": "/fiːl freʃ/", "meaning": "cảm thấy mát mẻ - cảm thấy sảng khoái", "example": "I feel fresh." }
-  ]
-},
+  
     {
       "id": 30,
       "title": "30.🏨 Hotel Check-in",
