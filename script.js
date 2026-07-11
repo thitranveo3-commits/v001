@@ -4,7 +4,7 @@
    ======================================== */
 
 /* -- Cache version -- */
-var CACHE_VERSION = 'v20260714';
+var CACHE_VERSION = 'v20260715';
 
 /* -- 1. Toast Notification -- */
 function showToast(message, type) {
