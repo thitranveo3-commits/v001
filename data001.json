@@ -22,7 +22,7 @@
 },
     {
   "id": 2,
-  "title": "🪥 Brushing Teeth",
+  "title": "2.🪥 Brushing Teeth",
   "icon": "🪥",
   "subtitle": "Đánh răng",
   "sentences": [
@@ -40,36 +40,7 @@
     { "word": "brushing", "meaning": "đang đánh răng" }
   ]
 },
-    {
-      "id": 2,
-      "title": "2.👋 Introducing Yourself",
-      "icon": "👋",
-      "subtitle": "Giới thiệu bản thân",
-      "sentences": [
-        { "en": "Hi, I'm Alex. Nice to meet you!", "vi": "Chào, tôi là Alex. Rất vui được gặp bạn!", "ipa": "haɪ | aɪm ˈælɪks | naɪs tə miːt juː" },
-        { "en": "Hello Alex, my name is Maria.", "vi": "Chào Alex, tên tôi là Maria.", "ipa": "həˈloʊ ˈælɪks | maɪ neɪm ɪz məˈriːə" },
-        { "en": "Where are you from, Maria?", "vi": "Bạn đến từ đâu vậy Maria?", "ipa": "wɛr ɑːr juː frʌm | məˈriːə" },
-        { "en": "I'm from Spain, but I live in London now.", "vi": "Tôi đến từ Tây Ban Nha, nhưng hiện sống ở London.", "ipa": "aɪm frʌm speɪn | bʌt aɪ lɪv ɪn ˈlʌndən naʊ" },
-        { "en": "What do you do for a living?", "vi": "Bạn làm nghề gì?", "ipa": "wɒt duː juː duː fɔːr ə ˈlɪvɪŋ" },
-        { "en": "I work as a graphic designer.", "vi": "Tôi làm thiết kế đồ họa.", "ipa": "aɪ wɜːrk æz ə ˈɡræfɪk dɪˈzaɪnər" },
-        { "en": "That sounds interesting! I'm a teacher.", "vi": "Nghe thú vị đấy! Tôi là giáo viên.", "ipa": "ðæt saʊndz ˈɪntrəstɪŋ | aɪm ə ˈtiːtʃər" },
-        { "en": "Great to meet you. Let's keep in touch!", "vi": "Rất vui được gặp bạn. Hãy giữ liên lạc nhé!", "ipa": "ɡreɪt tə miːt juː | lets kiːp ɪn tʌtʃ" }
-      ],
-      "vocabulary": [
-        { "word": "nice to meet you", "meaning": "rất vui được gặp bạn" },
-        { "word": "graphic designer", "meaning": "nhà thiết kế đồ hoạ" },
-        { "word": "keep in touch", "meaning": "giữ liên lạc" },
-        { "word": "interesting", "meaning": "thú vị" },
-        { "word": "name", "meaning": "tên" },
-        { "word": "from", "meaning": "từ (đến từ)" },
-        { "word": "live", "meaning": "sống" },
-        { "word": "work as", "meaning": "làm việc với tư cách" },
-        { "word": "teacher", "meaning": "giáo viên" },
-        { "word": "meet", "meaning": "gặp" },
-        { "word": "great", "meaning": "tuyệt vời" },
-        { "word": "hello", "meaning": "xin chào" }
-      ]
-    },
+   
     {
   "id": 3,
   "title": "3.💦 Washing Your Face",
@@ -114,8 +85,8 @@
   ]
 },
    {
-  "id": 7,
-  "title": "🪥 Morning Routine",
+  "id": 5,
+  "title": "5.🪥 Morning Routine",
   "icon": "🪥",
   "subtitle": "Vệ sinh buổi sáng",
   "sentences": [
