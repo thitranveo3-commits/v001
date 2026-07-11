@@ -24,26 +24,7 @@
       ]
     },
     
-    {
-      "id": 3,
-      "title": "🗺️ Asking for Directions",
-      "icon": "🗺️",
-      "subtitle": "Hỏi đường",
-      "sentences": [
-        { "en": "Excuse me, where is the nearest bank?", "vi": "Xin lỗi, ngân hàng gần nhất ở đâu?" },
-        { "en": "Go straight ahead for two blocks.", "vi": "Đi thẳng khoảng hai dãy nhà." },
-        { "en": "Then turn right at the corner.", "vi": "Sau đó rẽ phải ở góc đường." },
-        { "en": "The bank is next to the supermarket.", "vi": "Ngân hàng ở bên cạnh siêu thị." },
-        { "en": "How long does it take to walk there?", "vi": "Đi bộ đến đó mất bao lâu?" },
-        { "en": "It's about 10 minutes on foot.", "vi": "Khoảng 10 phút đi bộ." },
-        { "en": "Thank you very much for your help!", "vi": "Cảm ơn bạn rất nhiều!" }
-      ],
-      "vocabulary": [
-        { "word": "straight ahead", "ipa": "/streɪt əˈhɛd/", "meaning": "đi thẳng", "example": "Go straight ahead." },
-        { "word": "turn right", "ipa": "/tɜːrn raɪt/", "meaning": "rẽ phải", "example": "Turn right at the corner." },
-        { "word": "on foot", "ipa": "/ɒn fʊt/", "meaning": "đi bộ", "example": "It's 10 minutes on foot." }
-      ]
-    },
+   
     {
       "id": 4,
       "title": "🏨 Hotel Check-in",
