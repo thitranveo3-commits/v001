@@ -23,29 +23,7 @@
         { "word": "enjoy", "ipa": "/ɪnˈdʒɔɪ/", "meaning": "thưởng thức", "example": "Enjoy your coffee!" }
       ]
     },
-    {
-      "id": 2,
-      "title": "👋 Introducing Yourself",
-      "icon": "👋",
-      "subtitle": "Giới thiệu bản thân",
-      "sentences": [
-        { "en": "Hi, I'm Alex. Nice to meet you!", "vi": "Chào, tôi là Alex. Rất vui được gặp bạn!" },
-        { "en": "Hello Alex, my name is Maria.", "vi": "Chào Alex, tên tôi là Maria." },
-        { "en": "Where are you from, Maria?", "vi": "Bạn đến từ đâu vậy Maria?" },
-        { "en": "I'm from Spain, but I live in London now.", "vi": "Tôi đến từ Tây Ban Nha, nhưng hiện sống ở London." },
-        { "en": "What do you do for a living?", "vi": "Bạn làm nghề gì?" },
-        { "en": "I work as a graphic designer.", "vi": "Tôi làm thiết kế đồ họa." },
-        { "en": "That sounds interesting! I'm a teacher.", "vi": "Nghe thú vị đấy! Tôi là giáo viên." },
-        { "en": "Great to meet you. Let's keep in touch!", "vi": "Rất vui được gặp bạn. Hãy giữ liên lạc nhé!" }
-      ],
-      "vocabulary": [
-        { "word": "nice to meet you", "ipa": "/naɪs tə miːt juː/", "meaning": "rất vui được gặp bạn", "example": "Nice to meet you!" },
-        { "word": "from", "ipa": "/frʌm/", "meaning": "từ", "example": "Where are you from?" },
-        { "word": "graphic designer", "ipa": "/ˈɡræfɪk dɪˈzaɪnər/", "meaning": "nhà thiết kế đồ họa", "example": "I work as a graphic designer." },
-        { "word": "keep in touch", "ipa": "/kiːp ɪn tʌtʃ/", "meaning": "giữ liên lạc", "example": "Let's keep in touch!" },
-        { "word": "interesting", "ipa": "/ˈɪntrəstɪŋ/", "meaning": "thú vị", "example": "That sounds interesting!" }
-      ]
-    },
+    
     {
       "id": 3,
       "title": "🗺️ Asking for Directions",
