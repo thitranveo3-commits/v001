@@ -4,7 +4,7 @@
    ======================================== */
 
 /* -- Cache version -- */
-var CACHE_VERSION = 'v20260713';
+var CACHE_VERSION = 'v20260714';
 
 /* -- 1. Toast Notification -- */
 function showToast(message, type) {
@@ -593,6 +593,23 @@ function renderVocabQuestion() {
   c.innerHTML = html;
   setTimeout(function() { var inp = document.getElementById('vocabInput'); if (inp) inp.focus(); }, 300);
 }
+/* -- Âm thanh "ting" dùng Web Audio API -- */
+function playTingSound() {
+  try {
+    var ctx = new (window.AudioContext || window.webkitAudioContext)();
+    var osc = ctx.createOscillator();
+    var gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.frequency.value = 880;
+    osc.type = 'sine';
+    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.3);
+  } catch(e) {}
+}
+
 function checkVocabAnswer() {
   if (vocabAnswered) return;
   var inp = document.getElementById('vocabInput');
@@ -608,6 +625,10 @@ function checkVocabAnswer() {
     inp.style.borderColor = '#22c55e'; inp.style.backgroundColor = '#f0fdf4';
     var ipa = q.ipa ? '<br><span class="text-indigo-500 text-sm font-mono">🔤 ' + escHtml(q.ipa) + '</span>' : '';
     if (fb) fb.innerHTML = '<div class="text-green-600 font-semibold text-lg">✅ Đúng! +1 ⭐</div>' + ipa;
+    playTingSound();
+    if (btn) btn.disabled = true; inp.disabled = true;
+    setTimeout(function() { nextVocab(); }, 800);
+    return;
   } else {
     inp.style.borderColor = '#ef4444'; inp.style.backgroundColor = '#fef2f2';
     var ipa = q.ipa ? ' 🔤 ' + escHtml(q.ipa) : '';
@@ -662,7 +683,10 @@ function checkWriting() {
     writingScore++;
     inp.classList.add('correct-input'); inp.disabled = true;
     document.getElementById('writingResult').innerHTML = '<div class="result-correct p-3 text-center result-pop"><div class="text-lg">✅</div><p class="text-green-700 font-medium">Đúng!</p></div>';
-    document.getElementById('writingNextWrap').style.display = 'block';
+    document.getElementById('writingCheckBtn').style.display = 'none';
+    playTingSound();
+    setTimeout(function() { nextWriting(); }, 800);
+    return;
   } else {
     inp.classList.add('wrong-input'); inp.disabled = true;
     document.getElementById('writingResult').innerHTML = '<div class="result-incorrect p-3 text-center result-pop"><div class="text-lg mb-1">❌</div><p class="text-red-700 font-medium text-sm mb-1">Bạn viết: ' + escHtml(userText) + '</p><p class="text-gray-700 text-sm">Đáp án: <strong>' + escHtml(s.en) + '</strong></p><button onclick="retryWriting()" class="mt-2 text-red-600 font-medium text-sm px-3 py-1 rounded-full border border-red-300 hover:bg-red-50">Thử lại</button></div>';
