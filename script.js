@@ -4,7 +4,7 @@
    ======================================== */
 
 /* -- Cache version -- */
-var CACHE_VERSION = 'v20260720';
+var CACHE_VERSION = 'v20260725';
 
 /* -- 1. Toast Notification -- */
 function showToast(message, type) {
@@ -100,29 +100,17 @@ async function initData() {
     var convs = [];
     for (var i = 0; i < lessons.length; i++) {
       var l = lessons[i];
-      // Build sentences with vocab from vocabulary if available
+      // Build sentences (vocabulary IPA now inline per sentence)
       var sentences = l.sentences.map(function(s) {
-        return { en: s.en, vi: s.vi || '', vocab: [] };
+        return { en: s.en, vi: s.vi || '', ipa: s.ipa || '' };
       });
-      // Attach vocabulary where matches
-      if (l.vocabulary && l.vocabulary.length > 0) {
-        l.vocabulary.forEach(function(v) {
-          // Find a sentence that contains this word
-          for (var si = 0; si < sentences.length; si++) {
-            if (sentences[si].en.toLowerCase().indexOf(v.word.toLowerCase()) >= 0) {
-              if (!sentences[si].vocab) sentences[si].vocab = [];
-              sentences[si].vocab.push({ word: v.word, ipa: v.ipa || '', meaning: v.meaning || '' });
-              break;
-            }
-          }
-        });
-      }
       convs.push({
         id: l.id || (i + 1),
         title: l.title || 'Lesson ' + (i + 1),
         icon: l.icon || '\uD83D\uDCAC',
         subtitle: l.subtitle || '',
-        sentences: sentences
+        sentences: sentences,
+        vocabulary: l.vocabulary || []
       });
     }
     if (convs.length > 0) {
@@ -189,6 +177,7 @@ var vocabQuestions = [];
 var vocabIndex = 0;
 var vocabScore = 0;
 var vocabAnswered = false;
+var vocabHearMode = false;
 var writingIndex = 0;
 var writingScore = 0;
 var writingAnswered = false;
@@ -203,7 +192,7 @@ var speakFastListening = false;
 /* Player state */
 var playerSpeechRate = 1.0;
 var playerRepeatConversation = false;
-var playerVietnameseFirst = false;
+var playerVietnameseFirst = true;
 var playerHideEnglish = false;
 var playerIsPlaying = false;
 var playerCurrentIdx = -1;
@@ -320,11 +309,11 @@ function renderModeSelectView() {
   html += '</div>';
 
   html += '<div class="space-y-3">';
+  html += '<div class="mode-card mode-card-vocab" onclick="switchView(\'player\', currentConvData)"><div class="mode-icon">🔊</div><div class="flex-1"><h3 class="font-semibold text-gray-800 text-base">Player nghe</h3><p class="text-gray-400 text-sm">Nghe toàn bộ hội thoại</p></div><div class="text-indigo-400 text-xl">→</div></div>';
   html += '<div class="mode-card mode-card-speak" onclick="switchView(\'practice\', currentConvData)"><div class="mode-icon">🎤</div><div class="flex-1"><h3 class="font-semibold text-gray-800 text-base">Luyện nói</h3><p class="text-gray-400 text-sm">Nói và so sánh với câu gốc</p></div><div class="text-green-500 text-xl">→</div></div>';
+  html += '<div class="mode-card mode-card-fast" onclick="switchView(\'speakfast\', currentConvData)"><div class="mode-icon">⚡</div><div class="flex-1"><h3 class="font-semibold text-gray-800 text-base">Nói nhanh</h3><p class="text-gray-400 text-sm">Phản xạ: nhìn dịch, nói câu Anh trong 7s</p></div>' + (bestFast > 0 ? '<div class="score-badge bg-red-100 text-red-700">⚡ ' + bestFast + '</div>' : '<div class="text-red-400 text-xl">→</div>') + '</div>';
   html += '<div class="mode-card mode-card-vocab" onclick="switchView(\'vocab\', currentConvData)"><div class="mode-icon">📝</div><div class="flex-1"><h3 class="font-semibold text-gray-800 text-base">Từ vựng &amp; Cụm từ</h3><p class="text-gray-400 text-sm">Xem nghĩa, nhập từ tiếng Anh</p></div>' + (bestVocab > 0 ? '<div class="score-badge bg-indigo-100 text-indigo-700">⭐ ' + bestVocab + '</div>' : '<div class="text-indigo-400 text-xl">→</div>') + '</div>';
   html += '<div class="mode-card mode-card-write" onclick="switchView(\'writing\', currentConvData)"><div class="mode-icon">✏️</div><div class="flex-1"><h3 class="font-semibold text-gray-800 text-base">Viết câu</h3><p class="text-gray-400 text-sm">Nhìn bản dịch, gõ câu tiếng Anh</p></div>' + (bestWriting > 0 ? '<div class="score-badge bg-amber-100 text-amber-700">⭐ ' + bestWriting + '</div>' : '<div class="text-amber-400 text-xl">→</div>') + '</div>';
-  html += '<div class="mode-card mode-card-fast" onclick="switchView(\'speakfast\', currentConvData)"><div class="mode-icon">⚡</div><div class="flex-1"><h3 class="font-semibold text-gray-800 text-base">Nói nhanh</h3><p class="text-gray-400 text-sm">Phản xạ: nhìn dịch, nói câu Anh trong 7s</p></div>' + (bestFast > 0 ? '<div class="score-badge bg-red-100 text-red-700">⚡ ' + bestFast + '</div>' : '<div class="text-red-400 text-xl">→</div>') + '</div>';
-  html += '<div class="mode-card mode-card-vocab" onclick="switchView(\'player\', currentConvData)"><div class="mode-icon">🔊</div><div class="flex-1"><h3 class="font-semibold text-gray-800 text-base">Player nghe</h3><p class="text-gray-400 text-sm">Nghe toàn bộ hội thoại</p></div><div class="text-indigo-400 text-xl">→</div></div>';
   html += '</div>';
   container.innerHTML = html;
 }
@@ -367,19 +356,12 @@ function renderPracticeView() {
   html += '<p class="font-extrabold text-gray-900 leading-tight mb-4 sentence-en-big">' + escHtml(sentence.en) + '</p>';
 
   // Tip
-  var hasIpa = sentence.vocab && sentence.vocab.some(function(v) { return v.ipa && v.ipa.trim(); });
+  var hasIpa = sentence.ipa && sentence.ipa.trim();
   html += '<div class="mt-2 mb-3">';
   html += '<span onclick="togglePracticeTip()" class="inline-flex items-center gap-1.5 text-base md:text-lg text-purple-600 hover:text-purple-800 font-medium cursor-pointer select-none">💡 Xem phiên âm IPA</span>';
   if (showPracticeTip) {
     if (hasIpa) {
-      html += '<div class="tip-panel mt-3"><div class="flex flex-wrap justify-center gap-x-5 gap-y-2">';
-      for (var vi = 0; vi < sentence.vocab.length; vi++) {
-        var v = sentence.vocab[vi];
-        if (v.ipa && v.ipa.trim()) {
-          html += '<div class="text-center"><span class="text-base font-semibold text-gray-800">' + escHtml(v.word) + '</span><br><span class="text-sm text-purple-500 font-mono">' + escHtml(v.ipa) + '</span></div>';
-        }
-      }
-      html += '</div></div>';
+      html += '<div class="tip-panel mt-3"><p class="text-lg text-purple-700 font-mono leading-relaxed">' + escHtml(sentence.ipa) + '</p></div>';
     } else {
       html += '<p class="text-sm text-gray-400 mt-2 italic">Chưa có phiên âm cho câu này</p>';
     }
@@ -541,12 +523,8 @@ function evaluateSpeech(recognizedText) {
     setTimeout(function() { fb.innerHTML = ''; isEvaluating = false; currentSentenceIndex++; renderPracticeView(); }, 1500);
   } else {
     var ipaHint = '';
-    if (sentence.vocab && sentence.vocab.length > 0) {
-      var parts = [];
-      sentence.vocab.forEach(function(v) { if (v.ipa) parts.push(v.word + ' ' + v.ipa); });
-      if (parts.length > 0) {
-        ipaHint = '<div class="mt-4 px-4 py-3 rounded-xl bg-amber-50 border border-amber-200 text-left"><p class="text-sm text-amber-600 font-semibold mb-1.5">🔤 Phiên âm IPA:</p><p class="text-base text-amber-800 font-mono leading-relaxed">' + escHtml(parts.join(' \\n ')) + '</p></div>';
-      }
+    if (sentence.ipa && sentence.ipa.trim()) {
+      ipaHint = '<div class="mt-4 px-4 py-3 rounded-xl bg-amber-50 border border-amber-200 text-left"><p class="text-sm text-amber-600 font-semibold mb-1.5">🔤 Phiên âm IPA:</p><p class="text-base text-amber-800 font-mono leading-relaxed">' + escHtml(sentence.ipa) + '</p></div>';
     }
     fb.innerHTML = '<div class="result-pop result-incorrect-warm text-center animate-scale-in"><div class="text-3xl mb-2">❌</div><p class="text-base text-gray-500 mb-1">Bạn đã nói:</p><p class="font-semibold text-red-700 text-xl md:text-2xl mb-3 leading-relaxed">"' + escHtml(recognizedText) + '"</p><div class="border-t border-red-200 pt-4 mt-2"><p class="text-base text-gray-500 mb-1.5">Câu đúng:</p><p class="font-semibold text-gray-800 text-xl md:text-2xl leading-relaxed">' + escHtml(original) + '</p></div><div class="flex items-center justify-center gap-4 mt-5"><button onclick="playSampleAudio(\'' + escHtml(original.replace(/'/g, "\\'")) + '\')" class="btn-practice-big grad-indigo text-white shadow-md">🔊 Nghe mẫu</button><button onclick="retrySpeaking()" class="btn-practice-big bg-white text-red-600 border-2 border-red-300">🎤 Nói lại</button></div>' + ipaHint + '</div>';
     if (st) st.innerHTML = '';
@@ -563,13 +541,14 @@ function nextSentence() { if (currentSentenceIndex < currentConvData.sentences.l
    VOCABULARY GAME
    ============================================ */
 function extractVocabulary(conv) {
-  if (!conv || !conv.sentences) return [];
+  if (!conv || !conv.vocabulary || !conv.vocabulary.length) return [];
   var v = [];
-  conv.sentences.forEach(function(s) {
-    if (s.vocab && s.vocab.length > 0) {
-      s.vocab.forEach(function(w) { if (w && w.word) v.push({ en: w.word, vi: w.meaning || '', ipa: w.ipa || '', context: s.en, contextVi: s.vi }); });
+  conv.vocabulary.forEach(function(item) {
+    if (item && item.word) {
+      v.push({ en: item.word, vi: item.meaning || '' });
     }
   });
+  // Shuffle
   for (var i = v.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = v[i]; v[i] = v[j]; v[j] = t; }
   return v;
 }
@@ -587,11 +566,33 @@ function renderVocabQuestion() {
   var html = '<div class="flex items-center mb-3"><button onclick="switchView(\'home\')" class="flex items-center gap-1 text-purple-600 font-medium py-1 text-sm">← Quay lại</button><span class="ml-auto text-xs text-gray-400">' + escHtml(currentConvData.title) + '</span></div>';
   var pct = (vocabIndex / total) * 100;
   html += '<div class="mb-3"><div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden"><div class="progress-fill h-full rounded-full bg-indigo-500" style="width:' + pct + '%"></div></div><p class="text-right text-xs text-gray-500 mt-0.5">Câu ' + (vocabIndex + 1) + ' / ' + total + ' · ⭐ ' + vocabScore + '</p></div>';
-  html += '<div class="bg-white rounded-card shadow-card p-6 text-center mb-4"><div class="text-4xl mb-2">📝</div><p class="text-xs text-gray-400 uppercase tracking-wide mb-1">Nhập từ/cụm từ tiếng Anh</p><p class="font-bold text-gray-900 text-xl mb-3">' + escHtml(q.vi) + '</p><p class="text-gray-400 text-xs italic mb-4">"' + escHtml(q.context) + '"</p><input id="vocabInput" type="text" class="writing-input text-center text-lg" placeholder="Gõ từ tiếng Anh..." autocomplete="off" autocapitalize="none" onkeydown="if(event.key===\'Enter\')checkVocabAnswer()"></div>';
+  // Toggle buttons
+  html += '<div class="flex justify-center gap-2 mb-3">';
+  html += '<button id="vocabModeSee" class="px-4 py-2 rounded-lg text-sm font-medium transition-all ' + (!vocabHearMode ? 'bg-indigo-100 text-indigo-700 font-semibold shadow-sm' : 'bg-gray-100 text-gray-500') + '" onclick="setVocabMode(false)">👁️ Xem nghĩa</button>';
+  html += '<button id="vocabModeHear" class="px-4 py-2 rounded-lg text-sm font-medium transition-all ' + (vocabHearMode ? 'bg-indigo-100 text-indigo-700 font-semibold shadow-sm' : 'bg-gray-100 text-gray-500') + '" onclick="setVocabMode(true)">🔊 Nghe từ</button>';
+  html += '</div>';
+  if (!vocabHearMode) {
+    html += '<div class="bg-white rounded-card shadow-card p-6 text-center mb-4"><div class="text-4xl mb-2">📝</div><p class="text-xs text-gray-400 uppercase tracking-wide mb-1">Nhập từ/cụm từ tiếng Anh</p><p class="font-bold text-gray-900 text-xl mb-4">' + escHtml(q.vi) + '</p><input id="vocabInput" type="text" class="writing-input text-center text-lg" placeholder="Gõ từ tiếng Anh..." autocomplete="off" autocapitalize="none" onkeydown="if(event.key===\'Enter\')checkVocabAnswer()"></div>';
+  } else {
+    html += '<div class="bg-white rounded-card shadow-card p-6 text-center mb-4"><div class="text-4xl mb-2">🔊</div><p class="text-xs text-gray-400 uppercase tracking-wide mb-1">Nghe và nhập từ tiếng Anh</p><button id="vocabHearBtn" class="w-20 h-20 bg-indigo-100 hover:bg-indigo-200 text-indigo-600 rounded-full text-4xl mx-auto mb-4 flex items-center justify-center transition-all shadow-sm" onclick="playVocabWord()">🔊</button><p class="text-gray-400 text-sm mb-3 hidden" id="vocabHint">' + escHtml(q.vi) + '</p><input id="vocabInput" type="text" class="writing-input text-center text-lg" placeholder="Nghe và gõ..." autocomplete="off" autocapitalize="none" onkeydown="if(event.key===\'Enter\')checkVocabAnswer()"></div>';
+  }
   html += '<div class="text-center"><button id="vocabCheckBtn" onclick="checkVocabAnswer()" class="bg-indigo-500 text-white font-semibold py-3 px-10 rounded-button shadow">Kiểm tra</button></div>';
   html += '<div id="vocabFeedback" class="text-center mt-4"></div><div id="vocabNextWrap" class="text-center mt-4" style="display:none"><button onclick="nextVocab()" class="bg-indigo-500 text-white font-semibold py-3 px-8 rounded-button shadow">Tiếp theo →</button></div>';
   c.innerHTML = html;
   setTimeout(function() { var inp = document.getElementById('vocabInput'); if (inp) inp.focus(); }, 300);
+}
+function setVocabMode(hear) {
+  vocabHearMode = hear;
+  renderVocabQuestion();
+}
+function playVocabWord() {
+  if (!vocabQuestions || !vocabQuestions[vocabIndex]) return;
+  var word = vocabQuestions[vocabIndex].en;
+  try { speechSynthesis.cancel(); } catch(e) {}
+  var u = new SpeechSynthesisUtterance(word);
+  u.lang = 'en-US';
+  u.rate = 0.8;
+  speechSynthesis.speak(u);
 }
 /* -- Âm thanh "ting" dùng Web Audio API -- */
 function playTingSound() {
@@ -623,20 +624,36 @@ function checkVocabAnswer() {
   if (isCorrect) {
     vocabScore++;
     inp.style.borderColor = '#22c55e'; inp.style.backgroundColor = '#f0fdf4';
-    var ipa = q.ipa ? '<br><span class="text-indigo-500 text-sm font-mono">🔤 ' + escHtml(q.ipa) + '</span>' : '';
-    if (fb) fb.innerHTML = '<div class="text-green-600 font-semibold text-lg">✅ Đúng! +1 ⭐</div>' + ipa;
+    if (fb) fb.innerHTML = '<div class="text-green-600 font-semibold text-lg">✅ Đúng! +1 ⭐</div>';
     playTingSound();
     if (btn) btn.disabled = true; inp.disabled = true;
-    setTimeout(function() { nextVocab(); }, 800);
+    setTimeout(function() {
+      nextVocab();
+      // Auto-play next word if in hear mode
+      if (vocabHearMode && vocabIndex < vocabQuestions.length) {
+        setTimeout(function() { playVocabWord(); }, 400);
+      }
+    }, 800);
     return;
   } else {
     inp.style.borderColor = '#ef4444'; inp.style.backgroundColor = '#fef2f2';
-    var ipa = q.ipa ? ' 🔤 ' + escHtml(q.ipa) : '';
-    if (fb) fb.innerHTML = '<div class="text-red-500 font-semibold text-lg">❌ Sai rồi!</div><div class="text-gray-600 mt-2">Đáp án: <strong class="text-gray-800">' + escHtml(q.en) + '</strong>' + ipa + '</div>';
+    var meaningExtra = vocabHearMode && q.vi ? ' — "' + escHtml(q.vi) + '"' : '';
+    if (fb) fb.innerHTML = '<div class="text-red-500 font-semibold text-lg">❌ Sai rồi!</div><div class="text-gray-600 mt-2">Đáp án: <strong class="text-gray-800">' + escHtml(q.en) + '</strong>' + meaningExtra + '</div><div class="mt-3 flex justify-center gap-2"><button onclick="playVocabWord()" class="inline-flex items-center gap-1 py-1.5 px-3 rounded-full bg-indigo-100 text-indigo-700 text-sm font-medium">🔊 Nghe lại</button><button onclick="retryVocab()" class="inline-flex items-center gap-1 py-1.5 px-3 rounded-full bg-red-100 text-red-700 text-sm font-medium">✏️ Nhập lại</button></div>';
   }
   if (btn) btn.disabled = true; inp.disabled = true;
   var nw = document.getElementById('vocabNextWrap');
   if (nw) nw.style.display = 'block';
+}
+function retryVocab() {
+  vocabAnswered = false;
+  var inp = document.getElementById('vocabInput');
+  if (inp) { inp.value = ''; inp.disabled = false; inp.style.borderColor = ''; inp.style.backgroundColor = ''; inp.focus(); }
+  var fb = document.getElementById('vocabFeedback');
+  if (fb) fb.innerHTML = '';
+  var nw = document.getElementById('vocabNextWrap');
+  if (nw) nw.style.display = 'none';
+  var btn = document.getElementById('vocabCheckBtn');
+  if (btn) btn.disabled = false;
 }
 function nextVocab() { vocabIndex++; vocabAnswered = false; renderVocabQuestion(); }
 function renderVocabResult() {
@@ -857,7 +874,7 @@ function renderPlayerView() {
   html += '<div class="speed-label" id="playerSpeedLabel">Speed: ' + playerSpeechRate.toFixed(1) + 'x</div>';
   html += '<div class="player-checkbox-group">';
   html += '<label class="player-checkbox-label' + (playerRepeatConversation ? ' active' : '') + '"><input type="checkbox" ' + (playerRepeatConversation ? 'checked' : '') + ' onchange="togglePlayerRepeat(this.checked)"> 🔄 Repeat Conversation</label>';
-  html += '<label class="player-checkbox-label' + (playerVietnameseFirst ? ' active' : '') + '"><input type="checkbox" ' + (playerVietnameseFirst ? 'checked' : '') + ' onchange="togglePlayerVietnameseFirst(this.checked)"> 🇻🇳 Vietnamese First</label>';
+  html += '<label class="player-checkbox-label' + (playerVietnameseFirst ? ' active' : '') + '"><input type="checkbox" ' + (playerVietnameseFirst ? 'checked' : '') + ' onchange="togglePlayerVietnameseFirst(this.checked)"> 🇻🇳 VI trước → 5s → EN</label>';
   html += '<label class="player-checkbox-label' + (playerHideEnglish ? ' active' : '') + '"><input type="checkbox" ' + (playerHideEnglish ? 'checked' : '') + ' onchange="togglePlayerHideEnglish(this.checked)"> 🙈 Hide English</label>';
   html += '</div></div>';
 
@@ -874,11 +891,8 @@ function renderPlayerView() {
     html += '<div class="player-sentence-body"><div class="player-sentence-en' + (playerHideEnglish ? ' hidden-text' : '') + '" id="ps_en_' + i + '">' + escHtml(s.en) + '</div>';
     html += '<div class="player-tip-area" id="ps_tip_' + i + '"><span class="player-tip-btn" onclick="togglePlayerTip(' + i + ')">💡 Tip</span>';
     html += '<div class="player-tip-ipa" id="ps_ipa_' + i + '" style="display:none">';
-    if (s.vocab && s.vocab.length > 0) {
-      for (var vi = 0; vi < s.vocab.length; vi++) {
-        var v = s.vocab[vi];
-        if (v && v.ipa && v.ipa.trim()) html += '<span class="player-tip-word">' + escHtml(v.word) + ' <span class="player-tip-ipa-text">' + escHtml(v.ipa) + '</span></span>';
-      }
+    if (s.ipa && s.ipa.trim()) {
+      html += '<span class="player-tip-word text-base">IPA: <span class="player-tip-ipa-text">' + escHtml(s.ipa) + '</span></span>';
     } else { html += '<span class="player-tip-empty">Chưa có phiên âm</span>'; }
     html += '</div></div>';
     html += '<div class="player-sentence-vi" id="ps_vi_' + i + '">' + escHtml(s.vi) + '</div></div>';
@@ -991,6 +1005,8 @@ function startPlayerPlay() {
   if (!currentConvData || !currentConvData.sentences || !currentConvData.sentences.length) return;
   playerCurrentIdx = -1; playerIsPlaying = true;
   var btn = document.getElementById('playerPlayBtn'); if (btn) btn.textContent = '⏸';
+  // Set media session for lock screen controls
+  setupMediaSession();
   playerPlayNext();
 }
 function playerPlayNext() {
@@ -1007,13 +1023,60 @@ function playerPlayNext() {
   }
   playerCurrentIdx++; var idx = playerCurrentIdx; var s = sentences[idx];
   var card = document.getElementById('psc_' + idx); if (card) card.classList.add('playing-highlight');
-  var ind = document.getElementById('playerIndicator'); if (ind) ind.textContent = '🔊 ' + (idx + 1) + '/' + sentences.length + ': ' + s.en.substring(0, 40) + '...';
+  var ind = document.getElementById('playerIndicator'); if (ind) ind.textContent = '🔊 ' + (idx + 1) + '/' + sentences.length;
   try { speechSynthesis.cancel(); } catch(e) {}
-  var utterance = new SpeechSynthesisUtterance(s.en); utterance.lang = 'en-US'; utterance.rate = playerSpeechRate || 1.0;
-  var sb = document.getElementById('ps_speak_' + idx); if (sb) sb.classList.add('speaking');
-  utterance.onend = function() { if (sb) sb.classList.remove('speaking'); setTimeout(function() { playerPlayNext(); }, 600); };
-  utterance.onerror = function() { if (sb) sb.classList.remove('speaking'); setTimeout(function() { playerPlayNext(); }, 400); };
-  playerUtterance = utterance; speechSynthesis.speak(utterance);
+  
+  // Update Media Session metadata
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: s.en,
+      artist: currentConvData.title,
+      artwork: [{ src: '', sizes: '512x512', type: 'image/png' }]
+    });
+  }
+
+  // Determine if we speak Vietnamese first
+  var viFirst = typeof playerVietnameseFirst !== 'undefined' ? playerVietnameseFirst : true;
+  
+  if (viFirst && s.vi && s.vi.trim()) {
+    // Speak Vietnamese first
+    var viUtter = new SpeechSynthesisUtterance(s.vi); viUtter.lang = 'vi-VN'; viUtter.rate = 0.9;
+    var sb = document.getElementById('ps_speak_' + idx); if (sb) sb.classList.add('speaking');
+    viUtter.onend = function() {
+      // Wait 5 seconds
+      if (ind) ind.textContent = '🔊 ' + (idx + 1) + '/' + sentences.length + ' ⏳ Đợi 5s...';
+      setTimeout(function() {
+        if (!playerIsPlaying) return;
+        // Then speak English
+        if (ind) ind.textContent = '🔊 ' + (idx + 1) + '/' + sentences.length + ': ' + s.en;
+        var enUtter = new SpeechSynthesisUtterance(s.en); enUtter.lang = 'en-US'; enUtter.rate = playerSpeechRate || 1.0;
+        enUtter.onend = function() { if (sb) sb.classList.remove('speaking'); setTimeout(function() { playerPlayNext(); }, 800); };
+        enUtter.onerror = function() { if (sb) sb.classList.remove('speaking'); setTimeout(function() { playerPlayNext(); }, 400); };
+        playerUtterance = enUtter; speechSynthesis.speak(enUtter);
+      }, 5000);
+    };
+    viUtter.onerror = function() { if (sb) sb.classList.remove('speaking'); setTimeout(function() { playerPlayNext(); }, 400); };
+    playerUtterance = viUtter; speechSynthesis.speak(viUtter);
+  } else {
+    // Speak English only (original behavior)
+    if (ind) ind.textContent = '🔊 ' + (idx + 1) + '/' + sentences.length + ': ' + s.en.substring(0, 40) + '...';
+    var enUtter = new SpeechSynthesisUtterance(s.en); enUtter.lang = 'en-US'; enUtter.rate = playerSpeechRate || 1.0;
+    var sb = document.getElementById('ps_speak_' + idx); if (sb) sb.classList.add('speaking');
+    enUtter.onend = function() { if (sb) sb.classList.remove('speaking'); setTimeout(function() { playerPlayNext(); }, 600); };
+    enUtter.onerror = function() { if (sb) sb.classList.remove('speaking'); setTimeout(function() { playerPlayNext(); }, 400); };
+    playerUtterance = enUtter; speechSynthesis.speak(enUtter);
+  }
+}
+function setupMediaSession() {
+  if (!('mediaSession' in navigator)) return;
+  navigator.mediaSession.setActionHandler('play', function() { if (!playerIsPlaying) startPlayerPlay(); });
+  navigator.mediaSession.setActionHandler('pause', function() { if (playerIsPlaying) stopPlayerPlay(); });
+  navigator.mediaSession.setActionHandler('previoustrack', function() {
+    if (playerCurrentIdx > 0) { playerCurrentIdx -= 2; playerPlayNext(); }
+  });
+  navigator.mediaSession.setActionHandler('nexttrack', function() {
+    if (playerCurrentIdx < currentConvData.sentences.length - 1) { playerPlayNext(); }
+  });
 }
 function stopPlayerPlay() {
   playerIsPlaying = false; try { speechSynthesis.cancel(); } catch(e) {}
