@@ -1,31 +1,10 @@
 {
   "version": "1.0",
   "lessons": [
+   
     {
-      "id": 1,
-      "title": "☕ Ordering Coffee",
-      "icon": "☕",
-      "subtitle": "Gọi cà phê",
-      "sentences": [
-        { "en": "Good morning! What can I get for you today?", "vi": "Chào buổi sáng! Hôm nay tôi có thể phục vụ gì cho bạn?" },
-        { "en": "I'd like a cappuccino, please.", "vi": "Làm ơn cho tôi một cốc cappuccino." },
-        { "en": "Sure, would you like anything to eat with that?", "vi": "Được chứ, bạn có muốn ăn kèm gì không?" },
-        { "en": "Yes, I'll have a croissant too.", "vi": "Có, tôi cũng muốn một cái bánh sừng bò." },
-        { "en": "That'll be $7.50. How would you like to pay?", "vi": "Tổng cộng 7.50 đô. Bạn muốn thanh toán bằng cách nào?" },
-        { "en": "I'll pay by card, please.", "vi": "Tôi thanh toán bằng thẻ." },
-        { "en": "Here's your order. Enjoy your coffee!", "vi": "Đây là đồ của bạn. Thưởng thức cà phê nhé!" }
-      ],
-      "vocabulary": [
-        { "word": "Good morning", "ipa": "/ɡʊd ˈmɔːrnɪŋ/", "meaning": "Chào buổi sáng", "example": "Good morning! How are you?" },
-        { "word": "cappuccino", "ipa": "/ˌkæpʊˈtʃiːnoʊ/", "meaning": "cà phê cappuccino", "example": "I'd like a cappuccino." },
-        { "word": "croissant", "ipa": "/krwɑːˈsɑ̃ː/", "meaning": "bánh sừng bò", "example": "I'll have a croissant." },
-        { "word": "pay by card", "ipa": "/peɪ baɪ kɑːrd/", "meaning": "thanh toán bằng thẻ", "example": "I'll pay by card." },
-        { "word": "enjoy", "ipa": "/ɪnˈdʒɔɪ/", "meaning": "thưởng thức", "example": "Enjoy your coffee!" }
-      ]
-    },
-    {
-  "id": 2,
-  "title": "🌅 Wake Up",
+  "id": 1,
+  "title": "1.🌅 Wake Up",
   "icon": "🌅",
   "subtitle": "Thức dậy",
   "sentences": [
@@ -42,10 +21,47 @@
     { "word": "okay", "ipa": "/ˌoʊˈkeɪ/", "meaning": "dạ - được ạ", "example": "Okay, Dad." }
   ]
 },
-   
+   {
+  "id": 2,
+  "title": "2.🪥 Brushing Teeth",
+  "icon": "🪥",
+  "subtitle": "Đánh răng",
+  "sentences": [
+    { "en": "Brush your teeth, Lucy.", "ipa": "/brʌʃ jʊr tiːθ ˈluːsi/", "vi": "Con đánh răng đi, Lucy." },
+    { "en": "Okay, Dad.", "ipa": "/ˌoʊˈkeɪ dæd/", "vi": "Dạ được ạ, ba." },
+    { "en": "Good job.", "ipa": "/ɡʊd dʒɑːb/", "vi": "Tốt lắm." },
+    { "en": "I'm brushing.", "ipa": "/aɪm ˈbrʌʃɪŋ/", "vi": "Con đang đánh răng đây ạ." }
+  ],
+  "vocabulary": [
+    { "word": "brush", "ipa": "/brʌʃ/", "meaning": "chải - đánh (răng)", "example": "Brush your teeth." },
+    { "word": "teeth", "ipa": "/tiːθ/", "meaning": "răng", "example": "Brush your teeth." },
+    { "word": "brush your teeth", "ipa": "/brʌʃ jʊr tiːθ/", "meaning": "đánh răng", "example": "Brush your teeth, Lucy." },
+    { "word": "okay", "ipa": "/ˌoʊˈkeɪ/", "meaning": "dạ - được ạ", "example": "Okay, Dad." },
+    { "word": "good job", "ipa": "/ɡʊd dʒɑːb/", "meaning": "tốt lắm - làm tốt lắm", "example": "Good job." },
+    { "word": "brushing", "ipa": "/ˈbrʌʃɪŋ/", "meaning": "đang đánh răng", "example": "I'm brushing." }
+  ]
+},
     {
-      "id": 4,
-      "title": "🏨 Hotel Check-in",
+  "id": 3,
+  "title": "3.💦 Washing Your Face",
+  "icon": "💦",
+  "subtitle": "Rửa mặt",
+  "sentences": [
+    { "en": "Wash your face, Lucy.", "ipa": "/wɑːʃ jʊr feɪs ˈluːsi/", "vi": "Con rửa mặt đi, Lucy." },
+    { "en": "Okay, Dad.", "ipa": "/ˌoʊˈkeɪ dæd/", "vi": "Dạ được ạ, ba." },
+    { "en": "Good girl.", "ipa": "/ɡʊd ɡɜːrl/", "vi": "Con gái ngoan lắm." },
+    { "en": "I feel fresh.", "ipa": "/aɪ fiːl freʃ/", "vi": "Con cảm thấy sảng khoái rồi ạ." }
+  ],
+  "vocabulary": [
+    { "word": "wash", "ipa": "/wɑːʃ/", "meaning": "rửa", "example": "Wash your face." },
+    { "word": "wash your face", "ipa": "/wɑːʃ jʊr feɪs/", "meaning": "rửa mặt", "example": "Wash your face, Lucy." },
+    { "word": "good girl", "ipa": "/ɡʊd ɡɜːrl/", "meaning": "cô bé ngoan - ngoan lắm", "example": "Good girl." },
+    { "word": "feel fresh", "ipa": "/fiːl freʃ/", "meaning": "cảm thấy mát mẻ - cảm thấy sảng khoái", "example": "I feel fresh." }
+  ]
+},
+    {
+      "id": 30,
+      "title": "30.🏨 Hotel Check-in",
       "icon": "🏨",
       "subtitle": "Nhận phòng khách sạn",
       "sentences": [
