@@ -465,7 +465,7 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 .sound-wave-bars span:nth-child(3) { animation-delay: .3s; }
 .sound-wave-bars span:nth-child(4) { animation-delay: .45s; }
 
-.progress-fill { transition: width .5s cubic-bezier(.4,0,.2,1); }
+.progress-fill { transition: width .5s cubic-bezier(.4,0,.2,1); height: 100%; }
 
 /* --- Home View --- */
 .conversation-card {
@@ -631,6 +631,29 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 .sentence-en-big { font-size: 24px; }
 @media (min-width: 640px) { .sentence-en-big { font-size: 28px; } }
 @media (min-width: 768px) { .sentence-en-big { font-size: 32px; } }
+
+/* Căn giữa PC — nội dung trong view không bị dạt trái */
+#practiceContent, #modeSelectContent, #vocabContent, #writingContent, #speakFastContent, #playerContent {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Home view: căn giữa toàn bộ */
+#homeView {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#homeView .flex.items-center.justify-between {
+  text-align: center;
+  justify-content: center !important;
+}
+#conversationList {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* Responsive */
 @media (min-width: 640px) {
