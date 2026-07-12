@@ -105,6 +105,135 @@
     { "word": "breakfast", "meaning": "bữa sáng" },
     { "word": "have breakfast", "meaning": "ăn sáng" }
   ]
-} 
+},
+    {
+  "id": 6,
+  "title": "6.🍳 Eating Breakfast",
+  "icon": "🍳",
+  "subtitle": "Ăn sáng",
+  "sentences": [
+    { "en": "Good morning, Lucy. Eat your breakfast.", "vi": "Chào buổi sáng, Lucy. Con ăn bữa sáng đi.", "ipa": "ɡʊd ˈmɔːrnɪŋ ˈluːsi | iːt jʊr ˈbrekfəst" },
+    { "en": "Okay, Dad.", "vi": "Dạ được ạ, ba.", "ipa": "ˌoʊˈkeɪ dæd" },
+    { "en": "Is it yummy?", "vi": "Có ngon không con?", "ipa": "ɪz ɪt ˈjʌmi" },
+    { "en": "Yes, it's delicious.", "vi": "Dạ có, ngon tuyệt vời luôn ạ.", "ipa": "jes | ɪts dɪˈlɪʃəs" }
+  ],
+  "vocabulary": [
+    { "word": "good morning", "meaning": "chào buổi sáng" },
+    { "word": "eat", "meaning": "ăn" },
+    { "word": "breakfast", "meaning": "bữa sáng" },
+    { "word": "eat your breakfast", "meaning": "ăn bữa sáng của con đi" },
+    { "word": "yummy", "meaning": "ngon (từ ngữ trẻ em hay dùng)" },
+    { "word": "delicious", "meaning": "thơm ngon / ngon miệng" }
+  ]
+},
+   {
+  "id": 7,
+  "title": "7.👔 School Uniform",
+  "icon": "👔",
+  "subtitle": "Mặc đồng phục",
+  "sentences": [
+    { "en": "Put on your school uniform, Lucy.", "vi": "Con mặc đồng phục học sinh vào đi, Lucy.", "ipa": "pʊt ɑːn jʊr skuːl ˈjuːnɪfɔːrm ˈluːsi" },
+    { "en": "Okay, Dad.", "vi": "Dạ được ạ, ba.", "ipa": "ˌoʊˈkeɪ dæd" },
+    { "en": "Good job.", "vi": "Tốt lắm.", "ipa": "ɡʊd dʒɑːb" },
+    { "en": "I'm ready.", "vi": "Con sẵn sàng rồi ạ.", "ipa": "aɪm ˈredi" }
+  ],
+  "vocabulary": [
+    { "word": "put on", "meaning": "mặc vào / mang vào" },
+    { "word": "school uniform", "meaning": "đồng phục học sinh" },
+    { "word": "okay", "meaning": "dạ / được ạ" },
+    { "word": "good job", "meaning": "tốt lắm / làm tốt lắm" },
+    { "word": "ready", "meaning": "sẵn sàng" }
+  ]
+},
+    {
+  "id": 8,
+  "title": "8.🎒 Water Bottle",
+  "icon": "🎒",
+  "subtitle": "Mang bình nước",
+  "sentences": [
+    { "en": "Lucy, where is your water bottle?", "vi": "Lucy ơi, bình nước của con đâu rồi?", "ipa": "ˈluːsi | wer ɪz jʊr ˈwɔːtər ˈbɑːtl" },
+    { "en": "It's on the table.", "vi": "Nó ở trên bàn ạ.", "ipa": "ɪts ɑːn ðə ˈteɪbl" },
+    { "en": "Please put it in your backpack.", "vi": "Làm ơn cất nó vào trong ba lô của con đi.", "ipa": "pliːz pʊt ɪt ɪn jʊr ˈbækpæk" },
+    { "en": "Okay, Dad. It's in my backpack now.", "vi": "Dạ được ạ, ba. Bây giờ nó ở trong ba lô của con rồi.", "ipa": "ˌoʊˈkeɪ dæd | ɪts ɪn maɪ ˈbækpæk naʊ" },
+    { "en": "Great! Now we're ready to go.", "vi": "Tuyệt vời! Bây giờ chúng ta sẵn sàng đi rồi.", "ipa": "ɡreɪt | naʊ wɪr ˈredi tə ɡoʊ" },
+    { "en": "Let's go!", "vi": "Đi thôi nào!", "ipa": "lets ɡoʊ" }
+  ],
+  "vocabulary": [
+    { "word": "water bottle", "meaning": "bình nước" },
+    { "word": "on the table", "meaning": "ở trên bàn" },
+    { "word": "backpack", "meaning": "ba lô" },
+    { "word": "put it in", "meaning": "bỏ nó vào trong" },
+    { "word": "ready to go", "meaning": "sẵn sàng để đi" },
+    { "word": "let's go", "meaning": "đi thôi nào" }
+  ]
+},
+    {
+  "id": 9,
+  "title": "9.👟 Put On Your Shoes",
+  "icon": "👟",
+  "subtitle": "Mang giày",
+  "sentences": [
+    { "en": "Have you put on your shoes?", "vi": "Con đã mang giày vào chưa?", "ipa": "hæv juː pʊt ɑːn jʊr ʃuːz" },
+    { "en": "Not yet.", "vi": "Dạ chưa ạ.", "ipa": "nɑːt jet" },
+    { "en": "Please put them on.", "vi": "Con hãy mang giày vào nhé.", "ipa": "pliːz pʊt ðem ɑːn" },
+    { "en": "Okay.", "vi": "Dạ vâng.", "ipa": "ˌoʊˈkeɪ" },
+    { "en": "Great! We're ready to go.", "vi": "Tuyệt lắm! Chúng ta sẵn sàng đi thôi.", "ipa": "ɡreɪt | wɪr ˈredi tə ɡoʊ" },
+    { "en": "Let's go!", "vi": "Đi thôi nào!", "ipa": "lets ɡoʊ" }
+  ],
+  "vocabulary": [
+    { "word": "put on", "meaning": "mang vào / mặc vào" },
+    { "word": "shoes", "meaning": "đôi giày" },
+    { "word": "not yet", "meaning": "chưa ạ" },
+    { "word": "please", "meaning": "xin vui lòng / làm ơn" },
+    { "word": "great", "meaning": "tuyệt lắm" },
+    { "word": "ready", "meaning": "sẵn sàng" },
+    { "word": "ready to go", "meaning": "sẵn sàng để đi" },
+    { "word": "let's go", "meaning": "đi thôi nào" }
+  ]
+},
+    {
+  "id": 10,
+  "title": "10.🪖 Find Your Helmet",
+  "icon": "🪖",
+  "subtitle": "Tìm mũ bảo hiểm",
+  "sentences": [
+    { "en": "Dad, where is my helmet?", "vi": "Ba ơi, mũ bảo hiểm của con ở đâu ạ?", "ipa": "dæd | wer ɪz maɪ ˈhelmɪt" },
+    { "en": "It's on the shoe rack.", "vi": "Nó ở trên giá để giày đó con.", "ipa": "ɪts ɑːn ðə ʃuː ræk" },
+    { "en": "I found it.", "vi": "Con tìm thấy rồi ạ.", "ipa": "aɪ faʊnd ɪt" },
+    { "en": "Great! Put it on.", "vi": "Tuyệt lắm! Đội nó vào đi con.", "ipa": "ɡreɪt | pʊt ɪt ɑːn" },
+    { "en": "Okay, Dad.", "vi": "Dạ vâng, thưa ba.", "ipa": "ˌoʊˈkeɪ dæd" },
+    { "en": "Now we're ready to go!", "vi": "Bây giờ chúng ta sẵn sàng đi thôi!", "ipa": "naʊ wɪr ˈredi tə ɡoʊ" }
+  ],
+  "vocabulary": [
+    { "word": "helmet", "meaning": "mũ bảo hiểm" },
+    { "word": "where is", "meaning": "ở đâu" },
+    { "word": "shoe rack", "meaning": "giá để giày" },
+    { "word": "found", "meaning": "đã tìm thấy" },
+    { "word": "put it on", "meaning": "đội nó vào / mặc nó vào" },
+    { "word": "ready to go", "meaning": "sẵn sàng để đi" }
+  ]
+},
+    {
+  "id": 11,
+  "title": "11.🔑 Ready to Go",
+  "icon": "🔑",
+  "subtitle": "Sẵn sàng ra ngoài",
+  "sentences": [
+    { "en": "Dad, do you have the keys?", "vi": "Ba ơi, ba có chìa khóa không ạ?", "ipa": "dæd | duː juː hæv ðə kiːz" },
+    { "en": "Yes, I do.", "vi": "Có, ba có.", "ipa": "jes | aɪ duː" },
+    { "en": "Are we ready to go?", "vi": "Chúng ta sẵn sàng đi chưa ạ?", "ipa": "ɑːr wiː ˈredi tə ɡoʊ" },
+    { "en": "Yes, we are.", "vi": "Rồi, chúng ta sẵn sàng rồi.", "ipa": "jes | wiː ɑːr" },
+    { "en": "Let's go!", "vi": "Đi thôi nào!", "ipa": "lets ɡoʊ" },
+    { "en": "Have a great day!", "vi": "Chúc con một ngày tuyệt vời!", "ipa": "hæv ə ɡreɪt deɪ" }
+  ],
+  "vocabulary": [
+    { "word": "keys", "meaning": "chìa khóa" },
+    { "word": "have the keys", "meaning": "có chìa khóa" },
+    { "word": "ready", "meaning": "sẵn sàng" },
+    { "word": "ready to go", "meaning": "sẵn sàng để đi" },
+    { "word": "let's go", "meaning": "đi thôi nào" },
+    { "word": "have a great day", "meaning": "chúc một ngày tốt lành" }
+  ]
+},
   ]
 }
