@@ -4,7 +4,7 @@
    ======================================== */
 
 /* -- Cache version -- */
-var CACHE_VERSION = 'v20260727';
+var CACHE_VERSION = 'v20260728';
 
 /* -- 1. Toast Notification -- */
 function showToast(message, type) {
@@ -170,7 +170,6 @@ var isListening = false;
 var isEvaluating = false;
 var isPlayingAudio = false;
 var recognition = null;
-var showPracticeTip = false;
 
 /* Game state */
 var vocabQuestions = [];
@@ -192,7 +191,7 @@ var speakFastListening = false;
 /* Player state */
 var playerSpeechRate = 1.0;
 var playerRepeatConversation = false;
-var playerVietnameseFirst = true;
+var playerVietnameseFirst = false;
 var playerHideEnglish = false;
 var playerIsPlaying = false;
 var playerCurrentIdx = -1;
@@ -309,7 +308,7 @@ function renderModeSelectView() {
   html += '</div>';
 
   html += '<div class="space-y-3">';
-  html += '<div class="mode-card mode-card-vocab" onclick="switchView(\'player\', currentConvData)"><div class="mode-icon">🔊</div><div class="flex-1"><h3 class="font-semibold text-gray-800 text-base">Player nghe</h3><p class="text-gray-400 text-sm">Nghe toàn bộ hội thoại</p></div><div class="text-indigo-400 text-xl">→</div></div>';
+  html += '<div class="mode-card mode-card-vocab" onclick="switchView(\'player\', currentConvData)"><div class="mode-icon">🔊</div><div class="flex-1"><h3 class="font-semibold text-gray-800 text-base">Hội thoại</h3><p class="text-gray-400 text-sm">Nghe toàn bộ hội thoại</p></div><div class="text-indigo-400 text-xl">→</div></div>';
   html += '<div class="mode-card mode-card-speak" onclick="switchView(\'practice\', currentConvData)"><div class="mode-icon">🎤</div><div class="flex-1"><h3 class="font-semibold text-gray-800 text-base">Luyện nói</h3><p class="text-gray-400 text-sm">Nói và so sánh với câu gốc</p></div><div class="text-green-500 text-xl">→</div></div>';
   html += '<div class="mode-card mode-card-fast" onclick="switchView(\'speakfast\', currentConvData)"><div class="mode-icon">⚡</div><div class="flex-1"><h3 class="font-semibold text-gray-800 text-base">Nói nhanh</h3><p class="text-gray-400 text-sm">Phản xạ: nhìn dịch, nói câu Anh trong 7s</p></div>' + (bestFast > 0 ? '<div class="score-badge bg-red-100 text-red-700">⚡ ' + bestFast + '</div>' : '<div class="text-red-400 text-xl">→</div>') + '</div>';
   html += '<div class="mode-card mode-card-vocab" onclick="switchView(\'vocab\', currentConvData)"><div class="mode-icon">📝</div><div class="flex-1"><h3 class="font-semibold text-gray-800 text-base">Từ vựng &amp; Cụm từ</h3><p class="text-gray-400 text-sm">Xem nghĩa, nhập từ tiếng Anh</p></div>' + (bestVocab > 0 ? '<div class="score-badge bg-indigo-100 text-indigo-700">⭐ ' + bestVocab + '</div>' : '<div class="text-indigo-400 text-xl">→</div>') + '</div>';
@@ -322,7 +321,6 @@ function renderModeSelectView() {
    PRACTICE VIEW — BIG FONTS, BIG BUTTONS
    ============================================ */
 function renderPracticeView() {
-  showPracticeTip = false;
   var container = document.getElementById('practiceContent');
   if (!container || !currentConvData) return;
   if (recognition) { try { recognition.abort(); } catch(e) {} }
@@ -355,16 +353,13 @@ function renderPracticeView() {
   html += '<div id="sentenceCard" class="sentence-card-warm p-6 md:p-8 text-center mb-6">';
   html += '<p class="font-extrabold text-gray-900 leading-tight mb-4 sentence-en-big">' + escHtml(sentence.en) + '</p>';
 
-  // Tip
+  // Tip — always show IPA by default
   var hasIpa = sentence.ipa && sentence.ipa.trim();
   html += '<div class="mt-2 mb-3">';
-  html += '<span onclick="togglePracticeTip()" class="inline-flex items-center gap-1.5 text-base md:text-lg text-purple-600 hover:text-purple-800 font-medium cursor-pointer select-none">💡 Xem phiên âm IPA</span>';
-  if (showPracticeTip) {
-    if (hasIpa) {
-      html += '<div class="tip-panel mt-3"><p class="text-lg text-purple-700 font-mono leading-relaxed">' + escHtml(sentence.ipa) + '</p></div>';
-    } else {
-      html += '<p class="text-sm text-gray-400 mt-2 italic">Chưa có phiên âm cho câu này</p>';
-    }
+  if (hasIpa) {
+    html += '<div class="tip-panel mt-0"><p class="text-lg text-purple-700 font-mono leading-relaxed">🔤 ' + escHtml(sentence.ipa) + '</p></div>';
+  } else {
+    html += '<p class="text-sm text-gray-400 italic">Chưa có phiên âm cho câu này</p>';
   }
   html += '</div>';
 
@@ -406,8 +401,6 @@ function renderPracticeView() {
 
   container.innerHTML = html;
 }
-
-function togglePracticeTip() { showPracticeTip = !showPracticeTip; renderPracticeView(); }
 
 function showCompletion() {
   var container = document.getElementById('practiceContent');
@@ -669,7 +662,18 @@ function renderVocabResult() {
 /* ============================================
    WRITING GAME
    ============================================ */
-function initWritingGame() { writingIndex = 0; writingScore = 0; writingAnswered = false; renderWritingQuestion(); }
+/* Writing state */
+var writingHearMode = false;
+
+function initWritingGame() { writingIndex = 0; writingScore = 0; writingAnswered = false; writingHearMode = false; renderWritingQuestion(); }
+function setWritingMode(hear) { writingHearMode = hear; renderWritingQuestion(); }
+function playWritingWord() {
+  if (!currentConvData || !currentConvData.sentences[writingIndex]) return;
+  var word = currentConvData.sentences[writingIndex].en;
+  try { speechSynthesis.cancel(); } catch(e) {}
+  var u = new SpeechSynthesisUtterance(word); u.lang = 'en-US'; u.rate = 0.8;
+  speechSynthesis.speak(u);
+}
 function renderWritingQuestion() {
   var c = document.getElementById('writingContent');
   if (!c || !currentConvData) return;
@@ -679,11 +683,22 @@ function renderWritingQuestion() {
   var html = '<div class="flex items-center mb-3"><button onclick="switchView(\'home\')" class="flex items-center gap-1 text-purple-600 font-medium py-1 text-sm">← Quay lại</button><span class="ml-auto text-xs text-gray-400">' + escHtml(currentConvData.title) + '</span></div>';
   var pct = (writingIndex / total) * 100;
   html += '<div class="mb-3"><div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden"><div class="progress-fill h-full rounded-full bg-amber-500" style="width:' + pct + '%"></div></div><p class="text-right text-xs text-gray-500 mt-0.5">Câu ' + (writingIndex + 1) + ' / ' + total + ' · ⭐ ' + writingScore + '</p></div>';
-  html += '<div class="bg-white rounded-card shadow-card p-5 text-center mb-4"><div class="text-3xl mb-2">✏️</div><p class="text-xs text-gray-400 uppercase tracking-wide mb-2">Viết câu tiếng Anh</p><p class="text-gray-500 mb-1">Dịch:</p><p class="font-bold text-gray-900 text-xl">' + escHtml(s.vi) + '</p></div>';
+  // Toggle buttons
+  html += '<div class="flex justify-center gap-2 mb-3">';
+  html += '<button id="writingModeSee" class="px-4 py-2 rounded-lg text-sm font-medium transition-all ' + (!writingHearMode ? 'bg-amber-100 text-amber-700 font-semibold shadow-sm' : 'bg-gray-100 text-gray-500') + '" onclick="setWritingMode(false)">👁️ Xem nghĩa</button>';
+  html += '<button id="writingModeHear" class="px-4 py-2 rounded-lg text-sm font-medium transition-all ' + (writingHearMode ? 'bg-amber-100 text-amber-700 font-semibold shadow-sm' : 'bg-gray-100 text-gray-500') + '" onclick="setWritingMode(true)">🔊 Nghe câu</button>';
+  html += '</div>';
+  if (!writingHearMode) {
+    html += '<div class="bg-white rounded-card shadow-card p-5 text-center mb-4"><div class="text-3xl mb-2">✏️</div><p class="text-xs text-gray-400 uppercase tracking-wide mb-2">Viết câu tiếng Anh</p><p class="text-gray-500 mb-1">Dịch:</p><p class="font-bold text-gray-900 text-xl">' + escHtml(s.vi) + '</p></div>';
+  } else {
+    html += '<div class="bg-white rounded-card shadow-card p-5 text-center mb-4"><div class="text-3xl mb-2">🔊</div><p class="text-xs text-gray-400 uppercase tracking-wide mb-2">Nghe và viết câu tiếng Anh</p><button id="writingHearBtn" class="w-20 h-20 bg-amber-100 hover:bg-amber-200 text-amber-600 rounded-full text-4xl mx-auto mb-4 flex items-center justify-center transition-all shadow-sm" onclick="playWritingWord()">🔊</button></div>';
+  }
   html += '<div class="mb-3"><input id="writingInput" type="text" class="writing-input" placeholder="Gõ câu tiếng Anh..." onkeydown="if(event.key===\'Enter\') checkWriting()"></div>';
   html += '<button id="writingCheckBtn" onclick="checkWriting()" class="w-full bg-amber-500 text-white font-semibold py-3.5 rounded-button shadow text-lg">✔ Kiểm tra</button>';
   html += '<div id="writingResult" class="mt-3"></div><div id="writingNextWrap" class="text-center mt-3" style="display:none"><button onclick="nextWriting()" class="bg-amber-500 text-white font-semibold py-3 px-8 rounded-button shadow">Tiếp theo →</button></div>';
   c.innerHTML = html;
+  // Auto-play if in hear mode
+  if (writingHearMode) { setTimeout(function() { playWritingWord(); }, 500); }
   setTimeout(function() { var inp = document.getElementById('writingInput'); if (inp) inp.focus(); }, 100);
 }
 function checkWriting() {
@@ -699,14 +714,20 @@ function checkWriting() {
   if (isCorrect) {
     writingScore++;
     inp.classList.add('correct-input'); inp.disabled = true;
-    document.getElementById('writingResult').innerHTML = '<div class="result-correct p-3 text-center result-pop"><div class="text-lg">✅</div><p class="text-green-700 font-medium">Đúng!</p></div>';
+    document.getElementById('writingResult').innerHTML = '<div class="result-correct p-3 text-center result-pop"><div class="text-lg">✅ Đúng! +1 ⭐</div></div>';
     document.getElementById('writingCheckBtn').style.display = 'none';
     playTingSound();
-    setTimeout(function() { nextWriting(); }, 800);
+    setTimeout(function() {
+      nextWriting();
+      if (writingHearMode && writingIndex < currentConvData.sentences.length) {
+        setTimeout(function() { playWritingWord(); }, 400);
+      }
+    }, 800);
     return;
   } else {
     inp.classList.add('wrong-input'); inp.disabled = true;
-    document.getElementById('writingResult').innerHTML = '<div class="result-incorrect p-3 text-center result-pop"><div class="text-lg mb-1">❌</div><p class="text-red-700 font-medium text-sm mb-1">Bạn viết: ' + escHtml(userText) + '</p><p class="text-gray-700 text-sm">Đáp án: <strong>' + escHtml(s.en) + '</strong></p><button onclick="retryWriting()" class="mt-2 text-red-600 font-medium text-sm px-3 py-1 rounded-full border border-red-300 hover:bg-red-50">Thử lại</button></div>';
+    var meaningExtra = writingHearMode ? '' : '';
+    document.getElementById('writingResult').innerHTML = '<div class="result-incorrect p-3 text-center result-pop"><div class="text-lg mb-1">❌ Sai rồi!</div><p class="text-red-700 font-medium text-sm mb-1">Bạn viết: ' + escHtml(userText) + '</p><p class="text-gray-700 text-sm">Đáp án: <strong>' + escHtml(s.en) + '</strong></p><div class="mt-2 flex justify-center gap-2">' + (writingHearMode ? '<button onclick="playWritingWord()" class="inline-flex items-center gap-1 py-1.5 px-3 rounded-full bg-amber-100 text-amber-700 text-sm font-medium">🔊 Nghe lại</button>' : '') + '<button onclick="retryWriting()" class="inline-flex items-center gap-1 py-1.5 px-3 rounded-full bg-red-100 text-red-700 text-sm font-medium">✏️ Nhập lại</button></div></div>';
   }
   document.getElementById('writingCheckBtn').style.display = 'none';
 }
@@ -878,8 +899,8 @@ function renderPlayerView() {
   html += '<label class="player-checkbox-label' + (playerHideEnglish ? ' active' : '') + '"><input type="checkbox" ' + (playerHideEnglish ? 'checked' : '') + ' onchange="togglePlayerHideEnglish(this.checked)"> 🙈 Hide English</label>';
   html += '</div></div>';
 
-  // Control bar
-  html += '<div class="player-control-bar"><button class="player-btn player-btn-play" id="playerPlayBtn" onclick="togglePlayerPlay()">▶</button><button class="player-btn player-btn-stop" onclick="stopPlayerPlay()">⏹</button><span class="player-playing-indicator" id="playerIndicator">Sẵn sàng</span></div>';
+  // Control bar — Play toggles Play/Stop
+  html += '<div class="player-control-bar"><button class="player-btn player-btn-play" id="playerPlayBtn" onclick="togglePlayerPlay()">▶</button><span class="player-playing-indicator" id="playerIndicator">Sẵn sàng</span></div>';
 
   // Sentence list
   html += '<div id="playerSentenceList">';
