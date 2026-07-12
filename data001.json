@@ -234,6 +234,75 @@
     { "word": "let's go", "meaning": "đi thôi nào" },
     { "word": "have a great day", "meaning": "chúc một ngày tốt lành" }
   ]
-}
+},
+    {
+  "id": 12,
+  "title": "12.Leaving the House",
+  "icon": "🚪",
+  "subtitle": "Rời khỏi nhà",
+  "sentences": [
+    { "en": "Is everything ready?", "vi": "Mọi thứ đã sẵn sàng chưa con?", "ipa": "ɪz ˈevriθɪŋ ˈredi" },
+    { "en": "Yes, everything is ready.", "vi": "Dạ rồi, mọi thứ đã sẵn sàng rồi ạ.", "ipa": "jes | ˈevriθɪŋ ɪz ˈredi" },
+    { "en": "Let's leave the house.", "vi": "Chúng ta rời nhà thôi nào.", "ipa": "lets liːv ðə haʊs" },
+    { "en": "Okay!", "vi": "Dạ được ạ!", "ipa": "ˌoʊˈkeɪ" },
+    { "en": "Have a great day at school.", "vi": "Chúc con có một ngày tuyệt vời ở trường nhé.", "ipa": "hæv ə ɡreɪt deɪ æt skuːl" },
+    { "en": "Thank you, Dad.", "vi": "Con cảm ơn ba ạ.", "ipa": "θæŋk juː dæd" }
+  ],
+  "vocabulary": [
+    { "word": "everything", "meaning": "mọi thứ" },
+    { "word": "ready", "meaning": "sẵn sàng" },
+    { "word": "leave", "meaning": "rời khỏi / đi ra khỏi" },
+    { "word": "house", "meaning": "ngôi nhà" },
+    { "word": "leave the house", "meaning": "rời khỏi nhà" },
+    { "word": "have a great day", "meaning": "chúc một ngày tốt lành" }
+  ]
+},
+    {
+  "id": 13,
+  "title": "13.Getting on the Motorbike",
+  "icon": "🏍️",
+  "subtitle": "Lên xe máy",
+  "sentences": [
+    { "en": "Are you ready?", "vi": "Con sẵn sàng chưa?", "ipa": "ɑːr juː ˈredi" },
+    { "en": "Yes, I am.", "vi": "Dạ rồi, con sẵn sàng rồi.", "ipa": "jes | aɪ æm" },
+    { "en": "Please get on the motorbike.", "vi": "Lên xe máy đi con.", "ipa": "pliːz ɡet ɑːn ðə ˈmoʊtərbaɪk" },
+    { "en": "Okay, Dad.", "vi": "Dạ được ạ, ba.", "ipa": "ˌoʊˈkeɪ dæd" },
+    { "en": "Hold on tight.", "vi": "Ôm chặt / Bám chắc vào nhé.", "ipa": "hoʊld ɑːn taɪt" },
+    { "en": "I will.", "vi": "Dạ con sẽ bám chặt ạ.", "ipa": "aɪ wɪl" }
+  ],
+  "vocabulary": [
+    { "word": "ready", "meaning": "sẵn sàng" },
+    { "word": "get on", "meaning": "lên (xe buýt / xe máy / tàu hỏa)" },
+    { "word": "motorbike", "meaning": "xe máy" },
+    { "word": "get on the motorbike", "meaning": "lên xe máy" },
+    { "word": "hold on", "meaning": "bám vào / vịn vào" },
+    { "word": "tight", "meaning": "chặt / chắc chắn" },
+    { "word": "hold on tight", "meaning": "ôm chặt vào / bám chắc vào" }
+  ]
+},
+    {
+  "id": 14,
+  "title": "14.Almost at School",
+  "icon": "🏫",
+  "subtitle": "Sắp đến trường",
+  "sentences": [
+    { "en": "Dad, are we close to school?", "vi": "Ba ơi, mình sắp đến trường chưa ạ?", "ipa": "dæd | ɑːr wiː kloʊs tə skuːl" },
+    { "en": "Yes, almost there.", "vi": "Ừ, sắp đến rồi con.", "ipa": "jes | ˈɔːlmoʊst ðer" },
+    { "en": "I'm so excited!", "vi": "Con háo hức quá!", "ipa": "aɪm soʊ ɪkˈsaɪtɪd" },
+    { "en": "I'm glad to hear that.", "vi": "Ba vui khi nghe con nói vậy.", "ipa": "aɪm ɡlæd tə hɪr ðæt" },
+    { "en": "I love going to school.", "vi": "Con thích đi học lắm.", "ipa": "aɪ lʌv ˈɡoʊɪŋ tə skuːl" },
+    { "en": "Have a great day, Lucy.", "vi": "Chúc con một ngày học thật vui nhé, Lucy.", "ipa": "hæv ə ɡreɪt deɪ ˈluːsi" }
+  ],
+  "vocabulary": [
+    { "word": "close to", "meaning": "gần / sắp đến" },
+    { "word": "school", "meaning": "trường học" },
+    { "word": "almost there", "meaning": "sắp đến rồi" },
+    { "word": "excited", "meaning": "háo hức" },
+    { "word": "glad", "meaning": "vui" },
+    { "word": "hear", "meaning": "nghe" },
+    { "word": "love going to school", "meaning": "thích đi học" },
+    { "word": "have a great day", "meaning": "chúc một ngày tốt lành" }
+  ]
+},
   ]
 }
