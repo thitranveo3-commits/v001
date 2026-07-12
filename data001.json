@@ -3,7 +3,7 @@
   "lessons": [
     {
   "id": 1,
-  "title": "1.🌅 Wake Up",
+  "title": "1.Wake Up",
   "icon": "🌅",
   "subtitle": "Thức dậy",
   "sentences": [
@@ -22,7 +22,7 @@
 },
     {
   "id": 2,
-  "title": "2.🪥 Brushing Teeth",
+  "title": "2.Brushing Teeth",
   "icon": "🪥",
   "subtitle": "Đánh răng",
   "sentences": [
@@ -43,7 +43,7 @@
    
     {
   "id": 3,
-  "title": "3.💦 Washing Your Face",
+  "title": "3.Washing Your Face",
   "icon": "💦",
   "subtitle": "Rửa mặt",
   "sentences": [
@@ -61,7 +61,7 @@
 },
     {
   "id": 4,
-  "title": "4.🪮 Brush Your Hair",
+  "title": "4.Brush Your Hair",
   "icon": "🪮",
   "subtitle": "Chải tóc",
   "sentences": [
@@ -86,7 +86,7 @@
 },
    {
   "id": 5,
-  "title": "5.🪥 Morning Routine",
+  "title": "5.Morning Routine",
   "icon": "🪥",
   "subtitle": "Vệ sinh buổi sáng",
   "sentences": [
@@ -108,7 +108,7 @@
 },
     {
   "id": 6,
-  "title": "6.🍳 Eating Breakfast",
+  "title": "6.Eating Breakfast",
   "icon": "🍳",
   "subtitle": "Ăn sáng",
   "sentences": [
@@ -128,7 +128,7 @@
 },
    {
   "id": 7,
-  "title": "7.👔 School Uniform",
+  "title": "7.School Uniform",
   "icon": "👔",
   "subtitle": "Mặc đồng phục",
   "sentences": [
@@ -147,7 +147,7 @@
 },
     {
   "id": 8,
-  "title": "8.🎒 Water Bottle",
+  "title": "8.Water Bottle",
   "icon": "🎒",
   "subtitle": "Mang bình nước",
   "sentences": [
@@ -169,7 +169,7 @@
 },
     {
   "id": 9,
-  "title": "9.👟 Put On Your Shoes",
+  "title": "9.Put On Your Shoes",
   "icon": "👟",
   "subtitle": "Mang giày",
   "sentences": [
@@ -193,7 +193,7 @@
 },
     {
   "id": 10,
-  "title": "10.🪖 Find Your Helmet",
+  "title": "10.Find Your Helmet",
   "icon": "🪖",
   "subtitle": "Tìm mũ bảo hiểm",
   "sentences": [
@@ -215,7 +215,7 @@
 },
     {
   "id": 11,
-  "title": "11.🔑 Ready to Go",
+  "title": "11.Ready to Go",
   "icon": "🔑",
   "subtitle": "Sẵn sàng ra ngoài",
   "sentences": [
