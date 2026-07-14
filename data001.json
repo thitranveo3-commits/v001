@@ -303,6 +303,24 @@
     { "word": "love going to school", "meaning": "thích đi học" },
     { "word": "have a great day", "meaning": "chúc một ngày tốt lành" }
   ]
+},
+    {
+  "id": 17,
+  "title": "📖 Reading a Storybook",
+  "icon": "📖",
+  "subtitle": "Đọc sách truyện",
+  "sentences": [
+    { "en": "What are you reading?", "vi": "Con đang đọc gì thế?", "ipa": "wʌt ɑːr juː ˈriːdɪŋ" },
+    { "en": "I'm reading a storybook.", "vi": "Con đang đọc một cuốn sách truyện ạ.", "ipa": "aɪm ˈriːdɪŋ ə ˈstɔːribʊk" },
+    { "en": "Do you like it?", "vi": "Con có thích nó không?", "ipa": "duː juː laɪk ɪt" },
+    { "en": "Yes, it's very interesting!", "vi": "Dạ có, nó rất thú vị ạ!", "ipa": "jes | ɪts ˈveri ˈɪntrəstɪŋ" }
+  ],
+  "vocabulary": [
+    { "word": "reading", "meaning": "đang đọc" },
+    { "word": "storybook", "meaning": "sách truyện" },
+    { "word": "like it", "meaning": "thích nó" },
+    { "word": "interesting", "meaning": "thú vị" }
+  ]
 }
   ]
 }
