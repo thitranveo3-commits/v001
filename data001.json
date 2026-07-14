@@ -305,8 +305,8 @@
   ]
 },
     {
-  "id": 17,
-  "title": "📖 Reading a Storybook",
+  "id": 15,
+  "title": "15.Reading a Storybook",
   "icon": "📖",
   "subtitle": "Đọc sách truyện",
   "sentences": [
@@ -320,6 +320,24 @@
     { "word": "storybook", "meaning": "sách truyện" },
     { "word": "like it", "meaning": "thích nó" },
     { "word": "interesting", "meaning": "thú vị" }
+  ]
+},
+    {
+  "id": 16,
+  "title": "16.Watching a Cartoon",
+  "icon": "📺",
+  "subtitle": "Xem phim hoạt hình",
+  "sentences": [
+    { "en": "What are you watching?", "vi": "Con đang xem cái gì thế?", "ipa": "wʌt ɑːr juː ˈwɑːtʃɪŋ" },
+    { "en": "I'm watching a cartoon.", "vi": "Con đang xem phim hoạt hình ạ.", "ipa": "aɪm ˈwɑːtʃɪŋ ə kɑːrˈtuːn" },
+    { "en": "Do you like it?", "vi": "Con có thích nó không?", "ipa": "duː juː laɪk ɪt" },
+    { "en": "Yes, I love it!", "vi": "Dạ có, con yêu thích nó lắm!", "ipa": "jes | aɪ lʌv ɪt" }
+  ],
+  "vocabulary": [
+    { "word": "watching", "meaning": "đang xem" },
+    { "word": "cartoon", "meaning": "phim hoạt hình" },
+    { "word": "like it", "meaning": "thích nó" },
+    { "word": "love it", "meaning": "yêu thích nó" }
   ]
 }
   ]
